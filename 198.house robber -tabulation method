@@ -1,0 +1,13 @@
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        #code using tabulation  that is the bottom-up approach 
+        # the space requirement in NIL that is no extra space
+        n=len(nums)
+        memo=[0]*(n+1)   
+        memo[n]=0            # the last index doesn't have any house so the ans stored is zero
+        memo[n-1]=nums[n-1]  #if only one house is present 
+        for i in range(n-2,-1,-1):
+            memo[i] = max(nums[i]+memo[i+2],memo[i+1])
+        return memo[0]        # since it is bottom-up and we are moving from  smallest to bigger so ans storedat the first index
+
+        
