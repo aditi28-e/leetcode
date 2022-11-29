@@ -1,0 +1,21 @@
+
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+
+        n=len(nums)
+        memo=[-1]*n  #create storage
+        return self.fun(0,nums,n,memo) 
+
+    def fun(self,pos,nums,n,memo):
+
+        if pos>=n:
+            return 0
+        if memo[pos]!=-1:
+            return memo[pos]   #check for the result in the storage 
+        # if not call the function and check for the possibilities then store the result in the storage
+        else:
+            inc=nums[pos] + self.fun(pos+2, nums,n,memo)
+            exc = self.fun(pos+1, nums,n,memo)
+            ans=max(inc,exc)
+            memo[pos]=ans          #most important step- store the result then return 
+        return memo[pos]          #final result 
